@@ -1,0 +1,7 @@
+entity transaction
+  id id
+  user_id id ref user.id
+  amount money
+  type text enum ["deposit", "withdraw", "transfer"]
+  status text enum ["pending", "completed", "failed"]
+  created_at time

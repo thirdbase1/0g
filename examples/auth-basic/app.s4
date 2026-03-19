@@ -1,0 +1,7 @@
+app "AuthBasic"
+  runtime bun
+  adapter vercel
+  security
+    headers secure
+    xss escape
+    csrf on

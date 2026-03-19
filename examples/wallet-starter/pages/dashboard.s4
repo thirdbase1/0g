@@ -1,0 +1,13 @@
+page "/dashboard"
+  auth user
+  layout app
+
+  data wallet from wallet.current
+  data recent from transaction.list limit 5
+
+  section "Wallet"
+    card "Balance"
+      value wallet.balance
+
+  section "Recent Transactions"
+    table recent

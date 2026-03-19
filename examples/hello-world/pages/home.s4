@@ -1,0 +1,5 @@
+page "/"
+  layout app
+
+  section "Welcome"
+    text "Hello from S⁴"

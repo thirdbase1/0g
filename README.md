@@ -1,40 +1,34 @@
-# S⁴ - The Next Generation Web Framework
+# S⁴ Framework
 
-S⁴ stands for **S**peed, **S**impleness, **S**ecurity, and **S**calability.
-It is an ultra-fast web framework built uniquely on top of Bun, leveraging a revolutionary "HTML-like" syntax.
+**Speed. Simplicity. Security.**
+*Simple to write. Fast to run. Safe by default.*
 
-## The Philosophy
+S⁴ (pronounced "Sora") is a revolutionary custom web framework built on a beginner-friendly, indentation-based DSL that feels as easy to read as HTML, but prioritizes modern server-side safety and execution speed on Bun.
 
-When we built S⁴, we had one simple question in mind: *What if writing backend routing was as simple as nesting HTML tags?*
+## Philosophy
 
-1. **Speed:** Built inherently on `Bun.serve()`, bypassing the overhead of traditional node frameworks.
-2. **Simpleness:** Written via standard JSX trees. If you can write `<div><p>Hello</p></div>`, you can write an S⁴ server.
-3. **Security:** Every response is automatically intercepted and enhanced with robust HTTP headers akin to industry-standard tools like Helmet.
+The file extension is `.s4`, but we call it **S⁴**.
+We believe you shouldn't have to write verbose JavaScript or deal with complex React/JSX setups to build robust APIs, pages, and data flows. S⁴ uses a simple declarative language that compiles down to highly optimized native Bun runtime output, ready for Vercel out of the box.
 
-## Example
-
-Take a look at `example.S⁴` to see it in action:
-
-```tsx
-import { start } from './src/s4';
-
-const app = (
-  <server port={3000}>
-    <get path="/" handler={() => "Lightning Fast & Simple."} />
-
-    <group path="/api">
-      <get path="/status" handler={() => ({ ok: true })} />
-    </group>
-  </server>
-);
-
-start(app);
-```
-
-To run your code, since Bun understands JSX natively, you can simply run it directly!
+## Quickstart
 
 ```bash
-bun run example.S⁴
+# Create a new app
+bun run packages/cli/src/index.ts new my-app
+
+# Run the dev server
+bun run dev
+
+# Deploy to Vercel
+bun run build:vercel
 ```
 
-Read [DOCS.md](./DOCS.md) for a deep dive, or check out [BENCHMARKS.md](./BENCHMARKS.md) to see just how fast we are.
+## Documentation
+
+See the [docs folder](./docs) for detailed guides on syntax, security, and deployment targets.
+
+## Examples
+
+- [Hello World](./examples/hello-world)
+- [Auth Basic](./examples/auth-basic)
+- [Wallet Starter](./examples/wallet-starter)
