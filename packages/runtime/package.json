@@ -1,0 +1,6 @@
+{
+  "name": "@s3/runtime",
+  "version": "0.1.0",
+  "description": "Runtime for S3 framework",
+  "main": "src/index.ts"
+}

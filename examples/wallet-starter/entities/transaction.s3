@@ -1,0 +1,7 @@
+entity transaction
+  id id
+  user_id id
+  type text
+  amount money
+  status text
+  created_at time

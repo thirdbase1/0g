@@ -1,0 +1,6 @@
+{
+  "name": "create-s3",
+  "version": "0.1.0",
+  "description": "Create S3 app",
+  "main": "src/index.ts"
+}

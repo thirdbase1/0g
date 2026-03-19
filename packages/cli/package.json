@@ -1,0 +1,13 @@
+{
+  "name": "@s3/cli",
+  "version": "0.1.0",
+  "description": "CLI for S3 framework",
+  "main": "src/index.ts",
+  "bin": {
+    "s3": "./src/index.ts"
+  },
+  "dependencies": {
+    "@s3/compiler": "workspace:*",
+    "@s3/runtime": "workspace:*"
+  }
+}

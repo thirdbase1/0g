@@ -1,0 +1,3 @@
+route get "/api/hello"
+  json
+    message "Hello from S³"

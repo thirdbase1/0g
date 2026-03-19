@@ -1,0 +1,26 @@
+flow transfer
+  auth user
+  rate 5/min
+
+  input
+    amount money
+    recipient email text email
+
+  check amount > 0
+    else fail "Amount must be greater than zero"
+
+  check wallet.balance >= amount
+    else fail "Insufficient balance"
+
+  find recipient_user user where email = input.recipient
+    else fail "Recipient not found"
+
+  debit wallet amount
+  credit recipient_user.wallet amount
+
+  create transaction
+    type "transfer"
+    amount amount
+    status "completed"
+
+  ok "Transfer successful"

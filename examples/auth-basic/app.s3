@@ -1,0 +1,10 @@
+app "Auth Demo"
+  runtime bun
+  adapter vercel
+  auth session
+
+  security
+    csrf on
+    xss escape
+    headers secure
+    rate default 60/min

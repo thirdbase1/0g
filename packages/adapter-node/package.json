@@ -1,0 +1,6 @@
+{
+  "name": "@s3/adapter-node",
+  "version": "0.1.0",
+  "description": "Node adapter for S3 framework",
+  "main": "src/index.ts"
+}

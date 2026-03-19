@@ -1,0 +1,9 @@
+route post "/withdraw"
+  auth user
+  rate 5/min
+
+  input
+    amount money
+
+  run withdraw
+    amount input.amount
