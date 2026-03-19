@@ -1,0 +1,23 @@
+import { start } from './src/s4';
+
+// S⁴ JSX Declarative syntax! Just like writing HTML.
+const app = (
+  <server port={3000}>
+    <get path="/" handler={() => "Welcome to S⁴! Lightning Fast & Simple."} />
+    <get path="/html" handler={() => new Response("<h1>Hello World</h1>", { headers: { "Content-Type": "text/html" }})} />
+
+    <group path="/api">
+      <get path="/status" handler={() => ({ status: "ok", uptime: process.uptime() })} />
+      <get path="/users" handler={() => [
+        { id: 1, name: "Alice" },
+        { id: 2, name: "Bob" }
+      ]} />
+      <post path="/users" handler={async (req: Request) => {
+        const body = await req.json();
+        return { created: true, data: body };
+      }} />
+    </group>
+  </server>
+);
+
+start(app);

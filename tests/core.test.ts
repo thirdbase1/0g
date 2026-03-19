@@ -1,20 +1,54 @@
 import { expect, test, describe, beforeAll, afterAll } from "bun:test";
-import { Server, Get, Post, Group } from "../src/nexa";
+import { start } from "../src/s4";
 
-describe("Nexa Framework", () => {
-  let server: ReturnType<typeof Server>;
+describe("S⁴ Framework", () => {
+  let server: ReturnType<typeof start>;
 
   beforeAll(() => {
-    server = Server({ port: 3001 }, [
-      Get('/', () => "Hello"),
-      Group('/group', [
-        Get('/item', () => ({ ok: true }))
-      ]),
-      Post('/echo', async (req) => {
-        const body = await req.json();
-        return body;
-      })
-    ]);
+    // Mimic the JSX compilation output since bun test doesn't run via the custom jsx-runtime
+    // by default inside a test file without specifically naming it .tsx or configuring bunfig
+    const app = {
+      type: "server",
+      props: {
+        port: 3001,
+        children: [
+          {
+            type: "get",
+            props: {
+              path: "/",
+              handler: () => "Hello"
+            }
+          },
+          {
+            type: "group",
+            props: {
+              path: "/group",
+              children: [
+                {
+                  type: "get",
+                  props: {
+                    path: "/item",
+                    handler: () => ({ ok: true })
+                  }
+                }
+              ]
+            }
+          },
+          {
+            type: "post",
+            props: {
+              path: "/echo",
+              handler: async (req: Request) => {
+                const body = await req.json();
+                return body;
+              }
+            }
+          }
+        ]
+      }
+    };
+
+    server = start(app);
   });
 
   afterAll(() => {

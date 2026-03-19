@@ -109,6 +109,6 @@ export function Server(options: ServerOptions, routes: (Route | RouteGroup)[]) {
     },
   });
 
-  console.log(`🚀 Nexa Server running on http://localhost:${server.port}`);
+  console.log(`🚀 S⁴ Server running on http://localhost:${server.port}`);
   return server;
 }
