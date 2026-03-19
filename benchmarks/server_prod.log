@@ -1,1 +1,16 @@
-PulseStack Server running at http://localhost:3001/
+30 | (async () => {
+31 |   const wallet = await ledger.createWallet('user_bench', 'USD');
+32 |   walletId = wallet.id;
+33 | })();
+34 |
+35 | const server = serve({
+                    ^
+error: Failed to start server. Is port 3001 in use?
+ syscall: "listen",
+   errno: 0,
+    code: "EADDRINUSE"
+
+      at /app/benchmarks/server.ts:35:16
+      at loadAndEvaluateModule (2:1)
+
+Bun v1.2.14 (Linux x64 baseline)

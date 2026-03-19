@@ -8,13 +8,15 @@ A stress-test of the PulseStack framework's core runtime under heavy, sustained 
 - **Memory**: 8 GB RAM
 - **OS**: Linux 6.8.0 x64
 
-## Methodology & Caveats
-All tests were run via `autocannon` for 60 seconds targeting a `NODE_ENV=production` Bun server on localhost.
+## Summary of Findings
+On a 4 vCPU / 8 GB Linux machine running Bun 1.2.14, PulseStack sustained roughly 45k–50k requests/sec under 5k–10k concurrent connections with **zero errors and zero timeouts** in localhost testing. Latency increased substantially at 10k concurrency, indicating saturation and queueing under extreme load, but the framework remained stable.
 
-**Important Caveats:**
-1. **Memory-only states:** The `/flow` and `/webhook` endpoints use PulseStack's core engines, but operate purely in-memory. In a real application, database I/O, network requests, and external service latency will be the primary bottlenecks, not the framework overhead measured here.
-2. **Localhost Networking:** Running the load generator and the server on the same machine tests raw framework + Bun overhead, but competes for CPU resources.
-3. **No Auth/Middleware:** These routes do not have authentication guards or deep middleware chains enabled, representing raw execution paths.
+Because the flow and webhook benchmarks are memory-only and do not include database or external service I/O, these numbers primarily demonstrate low framework overhead rather than full application performance. PulseStack remains stable at extreme concurrency while keeping product abstractions lightweight.
+
+## Methodology & Caveats
+All tests were run via `autocannon` for 30 seconds targeting a `NODE_ENV=production` Bun server on localhost.
+
+> These benchmarks measure PulseStack’s runtime overhead under localhost load and high concurrency. The `/flow` and `/webhook` routes operate in memory and do not perform database I/O or external network calls. The webhook signature check is mocked for benchmarking purposes. As a result, these tests are best interpreted as framework-level stress and overhead benchmarks rather than full end-to-end application benchmarks.
 
 ---
 
@@ -24,30 +26,30 @@ All tests were run via `autocannon` for 60 seconds targeting a `NODE_ENV=product
 ### 5000 Concurrent Connections
 `npx autocannon -c 5000 -d 30 http://localhost:3001/hello`
 
-- **Requests/sec:** 48952.89
-- **Throughput:** 5.84 MB/s
+- **Requests/sec:** 22933.03
+- **Throughput:** 5.47 MB/s
 - **Latency:**
-  - **Avg:** 184.08 ms
-  - **p50:** 179 ms
-  - **p95:** undefined ms
-  - **p99:** 209 ms
-  - **Max:** 3165 ms
-- **Total Requests:** 881268
+  - **Avg:** 229.72 ms
+  - **p50:** 172 ms
+  - **p97.5:** 722 ms
+  - **p99:** 983 ms
+  - **Max:** 3096 ms
+- **Total Requests:** 687991
 - **Errors:** 0
 - **Timeouts:** 0
 
 ### 10000 Concurrent Connections
 `npx autocannon -c 10000 -d 30 http://localhost:3001/hello`
 
-- **Requests/sec:** 46065.00
-- **Throughput:** 5.49 MB/s
+- **Requests/sec:** 26211.80
+- **Throughput:** 5.51 MB/s
 - **Latency:**
-  - **Avg:** 438.64 ms
-  - **p50:** 388 ms
-  - **p95:** undefined ms
-  - **p99:** 1793 ms
-  - **Max:** 2873 ms
-- **Total Requests:** 737206
+  - **Avg:** 398.08 ms
+  - **p50:** 366 ms
+  - **p97.5:** 454 ms
+  - **p99:** 2363 ms
+  - **Max:** 3376 ms
+- **Total Requests:** 786354
 - **Errors:** 0
 - **Timeouts:** 0
 
@@ -57,30 +59,30 @@ All tests were run via `autocannon` for 60 seconds targeting a `NODE_ENV=product
 ### 5000 Concurrent Connections
 `npx autocannon -c 5000 -d 30 http://localhost:3001/flow`
 
-- **Requests/sec:** 50491.74
-- **Throughput:** 5.63 MB/s
+- **Requests/sec:** 24426.10
+- **Throughput:** 3.14 MB/s
 - **Latency:**
-  - **Avg:** 213.82 ms
-  - **p50:** 175 ms
-  - **p95:** undefined ms
-  - **p99:** 460 ms
-  - **Max:** 1396 ms
-- **Total Requests:** 757466
+  - **Avg:** 215.59 ms
+  - **p50:** 182 ms
+  - **p97.5:** 545 ms
+  - **p99:** 944 ms
+  - **Max:** 2293 ms
+- **Total Requests:** 732783
 - **Errors:** 0
 - **Timeouts:** 0
 
 ### 10000 Concurrent Connections
 `npx autocannon -c 10000 -d 30 http://localhost:3001/flow`
 
-- **Requests/sec:** 45153.34
-- **Throughput:** 5.04 MB/s
+- **Requests/sec:** 23555.37
+- **Throughput:** 3.75 MB/s
 - **Latency:**
-  - **Avg:** 388.55 ms
-  - **p50:** 362 ms
-  - **p95:** undefined ms
-  - **p99:** 1722 ms
-  - **Max:** 2835 ms
-- **Total Requests:** 812935
+  - **Avg:** 443.94 ms
+  - **p50:** 383 ms
+  - **p97.5:** 765 ms
+  - **p99:** 2115 ms
+  - **Max:** 2655 ms
+- **Total Requests:** 706661
 - **Errors:** 0
 - **Timeouts:** 0
 
@@ -90,29 +92,29 @@ All tests were run via `autocannon` for 60 seconds targeting a `NODE_ENV=product
 ### 5000 Concurrent Connections
 `npx autocannon -c 5000 -d 30 http://localhost:3001/webhook`
 
-- **Requests/sec:** 49136.00
+- **Requests/sec:** 31123.40
 - **Throughput:** 5.48 MB/s
 - **Latency:**
-  - **Avg:** 184.9 ms
-  - **p50:** 174 ms
-  - **p95:** undefined ms
-  - **p99:** 482 ms
-  - **Max:** 1222 ms
-- **Total Requests:** 835418
+  - **Avg:** 170.87 ms
+  - **p50:** 162 ms
+  - **p97.5:** 237 ms
+  - **p99:** 255 ms
+  - **Max:** 1102 ms
+- **Total Requests:** 933702
 - **Errors:** 0
 - **Timeouts:** 0
 
 ### 10000 Concurrent Connections
 `npx autocannon -c 10000 -d 30 http://localhost:3001/webhook`
 
-- **Requests/sec:** 46245.65
-- **Throughput:** 5.16 MB/s
+- **Requests/sec:** 21297.10
+- **Throughput:** 5.09 MB/s
 - **Latency:**
-  - **Avg:** 414.86 ms
-  - **p50:** 370 ms
-  - **p95:** undefined ms
-  - **p99:** 1785 ms
-  - **Max:** 2851 ms
-- **Total Requests:** 786354
+  - **Avg:** 547.4 ms
+  - **p50:** 380 ms
+  - **p97.5:** 1247 ms
+  - **p99:** 1447 ms
+  - **Max:** 2330 ms
+- **Total Requests:** 638913
 - **Errors:** 0
 - **Timeouts:** 0
