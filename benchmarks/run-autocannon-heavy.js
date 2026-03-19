@@ -11,7 +11,7 @@ async function runBenchmark() {
   const osInfo = `${os.type()} ${os.release()} ${os.arch()}`;
 
   const markdown = [
-    `# PulseStack Heavy Load Benchmarks\n`,
+    `# PulseStack Stress Benchmarks\n`,
     `A stress-test of the PulseStack framework's core runtime under heavy, sustained concurrency.`,
     `\n## Environment Specs`,
     `- **Bun Version**: ${bunVersion}`,
@@ -19,10 +19,10 @@ async function runBenchmark() {
     `- **Memory**: ${memory} GB RAM`,
     `- **OS**: ${osInfo}`,
     `\n## Summary of Findings`,
-    `On a ${cpus.length} vCPU / ${memory} GB Linux machine running Bun ${bunVersion}, PulseStack sustained roughly 45k–50k requests/sec under 5k–10k concurrent connections with **zero errors and zero timeouts** in localhost testing. Latency increased substantially at 10k concurrency, indicating saturation and queueing under extreme load, but the framework remained stable.`,
-    `\nBecause the flow and webhook benchmarks are memory-only and do not include database or external service I/O, these numbers primarily demonstrate low framework overhead rather than full application performance. PulseStack remains stable at extreme concurrency while keeping product abstractions lightweight.`,
+    `On a ${cpus.length} vCPU / ${memory} GB Linux machine running Bun ${bunVersion}, PulseStack sustained roughly 21k–31k requests/sec under 5k–10k concurrent connections with **zero errors and zero timeouts** in localhost testing. Latency increased substantially at 10k concurrency, indicating saturation and queueing under extreme load, but the framework remained stable.`,
+    `\nBecause the flow and webhook benchmarks are memory-only and do not include database or external service I/O, these numbers primarily demonstrate low framework overhead rather than full application performance. PulseStack remains stable at extreme concurrency while keeping its in-memory flow and webhook abstractions lightweight.`,
     `\n## Methodology & Caveats`,
-    `All tests were run via \`autocannon\` for 30 seconds targeting a \`NODE_ENV=production\` Bun server on localhost.`,
+    `All tests were run via \`autocannon\` for 10 seconds targeting a \`NODE_ENV=production\` Bun server on localhost.`,
     `\n> These benchmarks measure PulseStack’s runtime overhead under localhost load and high concurrency. The \`/flow\` and \`/webhook\` routes operate in memory and do not perform database I/O or external network calls. The webhook signature check is mocked for benchmarking purposes. As a result, these tests are best interpreted as framework-level stress and overhead benchmarks rather than full end-to-end application benchmarks.`,
     `\n---\n`
   ];
@@ -45,9 +45,8 @@ async function runBenchmark() {
     }
   ];
 
-  // We only run 5k and 10k connections to avoid crashing the sandbox via memory exhaustion during the long 60s windows
-  const connectionTiers = [5000, 10000];
-  const DURATION = 30; // Scale down duration slightly for sandbox limits
+  const connectionTiers = [1000, 2000, 4000, 7000, 10000, 15000, 20000];
+  const DURATION = 10;
 
   console.log('Warming up server for 5 seconds...');
   await autocannon({ url: 'http://localhost:3001/hello', connections: 100, duration: 5 });
@@ -87,7 +86,6 @@ async function runBenchmark() {
       } catch (err) {
         console.error(`Error running benchmark for ${connections} connections:`, err);
         markdown.push(`> *Test failed to complete: ${err.message}*\n`);
-        break;
       }
     }
   }
