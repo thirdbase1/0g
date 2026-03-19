@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "@pulsestack/core": "workspace:*"
+  },
+  "devDependencies": {
+    "autocannon": "^8.0.0"
   }
 }
