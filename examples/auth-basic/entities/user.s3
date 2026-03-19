@@ -1,0 +1,6 @@
+entity user
+  id id
+  name text
+  email text unique
+  password hash
+  created_at time

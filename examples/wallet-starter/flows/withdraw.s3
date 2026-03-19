@@ -1,0 +1,21 @@
+flow withdraw
+  auth user
+  rate 5/min
+
+  input
+    amount money
+
+  check amount > 0
+    else fail "Amount must be greater than zero"
+
+  check wallet.balance >= amount
+    else fail "Insufficient balance"
+
+  debit wallet amount
+
+  create transaction
+    type "withdraw"
+    amount amount
+    status "pending"
+
+  ok "Withdrawal created"

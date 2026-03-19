@@ -1,0 +1,5 @@
+node_modules
+.s3-output
+dist
+build
+.vercel

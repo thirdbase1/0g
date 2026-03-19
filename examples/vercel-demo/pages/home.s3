@@ -1,0 +1,6 @@
+page "/"
+  layout app
+
+  section "Vercel Ready"
+    text "This is a Vercel-ready S³ framework deployment."
+    button post "/api/ping" "Ping Edge"

@@ -1,0 +1,6 @@
+{
+  "name": "@s3/compiler",
+  "version": "0.1.0",
+  "description": "Compiler for S3 framework",
+  "main": "src/index.ts"
+}

@@ -1,0 +1,52 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "s3-framework",
+    },
+    "packages/adapter-node": {
+      "name": "@s3/adapter-node",
+      "version": "0.1.0",
+    },
+    "packages/adapter-vercel": {
+      "name": "@s3/adapter-vercel",
+      "version": "0.1.0",
+    },
+    "packages/cli": {
+      "name": "@s3/cli",
+      "version": "0.1.0",
+      "bin": {
+        "s3": "./src/index.ts",
+      },
+      "dependencies": {
+        "@s3/compiler": "workspace:*",
+        "@s3/runtime": "workspace:*",
+      },
+    },
+    "packages/compiler": {
+      "name": "@s3/compiler",
+      "version": "0.1.0",
+    },
+    "packages/create-s3": {
+      "name": "create-s3",
+      "version": "0.1.0",
+    },
+    "packages/runtime": {
+      "name": "@s3/runtime",
+      "version": "0.1.0",
+    },
+  },
+  "packages": {
+    "@s3/adapter-node": ["@s3/adapter-node@workspace:packages/adapter-node"],
+
+    "@s3/adapter-vercel": ["@s3/adapter-vercel@workspace:packages/adapter-vercel"],
+
+    "@s3/cli": ["@s3/cli@workspace:packages/cli"],
+
+    "@s3/compiler": ["@s3/compiler@workspace:packages/compiler"],
+
+    "@s3/runtime": ["@s3/runtime@workspace:packages/runtime"],
+
+    "create-s3": ["create-s3@workspace:packages/create-s3"],
+  }
+}

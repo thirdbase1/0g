@@ -1,0 +1,7 @@
+page "/dashboard"
+  auth user
+  layout app
+
+  section "Dashboard"
+    text "Welcome back"
+    button post "/api/logout" "Log Out"

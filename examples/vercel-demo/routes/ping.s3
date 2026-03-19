@@ -1,0 +1,4 @@
+route post "/api/ping"
+  json
+    message "Pong from Vercel Serverless Function!"
+    time now
