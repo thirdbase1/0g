@@ -1,0 +1,12 @@
+Starting PulseStack dev server (Frontend + Backend API)...
+[vite] $ vite
+[api] $ bun run src/index.ts
+[api] PulseStack Demo running on http://localhost:3000
+[api] Created demo wallet: 626f4c73-8f24-4920-95f3-9f4b5a2d73cd
+[vite]
+[vite]   VITE v8.0.0  ready in 414 ms
+[vite]
+[vite]   ➜  Local:   http://localhost:5173/
+[vite]   ➜  Network: use --host to expose
+[api] Deposited 100 to 626f4c73-8f24-4920-95f3-9f4b5a2d73cd
+[api] Sent notification for deposit c582acd9-0475-4bdf-90b1-5e7d348ff4b5

@@ -1,0 +1,11 @@
+{
+  "name": "@pulsestack/cli",
+  "version": "1.0.0",
+  "bin": {
+    "pulse": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pulsestack/core": "workspace:*",
+    "concurrently": "^9.2.1"
+  }
+}

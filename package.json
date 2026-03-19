@@ -1,0 +1,21 @@
+{
+  "name": "pulsestack",
+  "version": "1.0.0",
+  "description": "Product-first framework designed for vibecoders and fast builders",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "benchmarks"
+  ],
+  "scripts": {
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "mitata": "^1.0.34"
+  }
+}

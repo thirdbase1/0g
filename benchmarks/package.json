@@ -1,0 +1,13 @@
+{
+  "name": "@pulsestack/benchmarks",
+  "version": "1.0.0",
+  "scripts": {
+    "bench:route": "bun run route.bench.ts",
+    "bench:flow": "bun run flow.bench.ts",
+    "bench:webhook": "bun run webhook.bench.ts",
+    "bench:all": "bun run route.bench.ts && bun run flow.bench.ts && bun run webhook.bench.ts"
+  },
+  "dependencies": {
+    "@pulsestack/core": "workspace:*"
+  }
+}
