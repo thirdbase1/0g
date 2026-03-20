@@ -1,0 +1,20 @@
+{
+  "name": "pulsestack-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@pulsestack/core": "workspace:*",
+    "@pulsestack/ui": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "@vitejs/plugin-react": "^6.0.1",
+    "tailwindcss": "^4.2.2",
+    "vite": "^8.0.0"
+  }
+}
