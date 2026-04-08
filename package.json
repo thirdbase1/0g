@@ -1,0 +1,15 @@
+{
+  "name": "s4-framework",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "dev": "bun run packages/cli/src/index.ts dev",
+    "build:vercel": "bun run packages/cli/src/index.ts build --target vercel",
+    "build:node": "bun run packages/cli/src/index.ts build --target node",
+    "example:hello": "bun run packages/cli/src/index.ts dev examples/hello-world",
+    "example:wallet": "bun run packages/cli/src/index.ts dev examples/wallet-starter"
+  }
+}

@@ -1,0 +1,16 @@
+route post "/login"
+  guest only
+  rate 10/min
+
+  input
+    email text email
+    password text min 8
+
+  find user where email = input.email
+    else fail "Invalid credentials"
+
+  check password input.password matches user.password
+    else fail "Invalid credentials"
+
+  session create user.id
+  ok "Logged in"

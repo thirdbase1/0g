@@ -1,0 +1,8 @@
+page "/login"
+  guest only
+  layout auth
+
+  form post "/login"
+    input email "Email"
+    input password "Password"
+    submit "Log in"

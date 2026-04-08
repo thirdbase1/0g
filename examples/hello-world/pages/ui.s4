@@ -1,0 +1,10 @@
+page "/ui"
+  state event_minutes 106 reward_1_claimed true
+
+  row align center gap 10 fill
+    position absolute right 308 top 38
+    drop_shadow 0 26px 40px rgba(0,0,0,.34)
+    backdrop blur 8
+
+    icon_button icon /assets/icons/close-gold.png size 21 tone gold width 52 height 52
+      on_click /api/close

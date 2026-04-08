@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.vercel/
+.s4-out/
+server.log
+benchmark_output.txt

@@ -1,0 +1,7 @@
+app "WalletStarter"
+  runtime bun
+  adapter vercel
+  security
+    headers secure
+    xss escape
+    rate default 60/min
